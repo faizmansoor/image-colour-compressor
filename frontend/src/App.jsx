@@ -8,6 +8,7 @@ import { StatusMessage } from "./components/StatusMessage";
 import { Loader } from "./components/Loader";
 import axios from "axios";
 
+
 function App() {
   const [file, setFile] = useState(null);
   const [colours, setcolours] = useState(8);
@@ -64,7 +65,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/compress",
+        `${import.meta.env.VITE_BACKEND_URL}/compress`,
         formData,
         {
           responseType: "blob", //receive the image as a blob
@@ -82,13 +83,13 @@ function App() {
         type: response.headers["content-type"],
       });
 
-      // Create a download link and trigger download
+      // Create a download link, trigger download
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.style.display = "none";
       a.href = url;
 
-      // Get filename from headers (if available) or set a default
+      // Get filename from headers or set a default
       const contentDisposition = response.headers["content-disposition"];
       const filename = contentDisposition
         ? contentDisposition.split("filename=")[1]?.replace(/"/g, "") ||
