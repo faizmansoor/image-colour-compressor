@@ -9,10 +9,8 @@ from datetime import datetime
 import logging
 import uuid
 
-from dotenv import load_dotenv
-import os
 
-load_dotenv() 
+
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
