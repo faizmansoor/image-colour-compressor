@@ -186,6 +186,7 @@ def request_entity_too_large(error):
     logger.warning("File upload exceeds size limit")
     return jsonify({"error": "File too large. Maximum file size is 5MB."}), 413
 
+import os
 if __name__ == '__main__':
-    logger.info("Starting Image Compressor application")
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Use PORT from Render, default to 5000 locally
+    app.run(host='0.0.0.0', port=port, debug=True)
